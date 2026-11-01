@@ -1,0 +1,1559 @@
+/* =============================================================================
+   ANIMATED COMIC NOIR - MASTER STYLESHEET (styles.css)
+   Strict Visual Style Rules:
+   1. Palette: STRICTLY Pure Black (#000000) and Pure White (#FFFFFF).
+      No grays, no accent colors, no semi-transparent alpha overlays.
+   2. Mid-tones: Created solely via Halftone Dots, Hatching, and Repeating Stripes.
+   3. Comic Borders: Thick ink borders (4px-6px) and hard zero-blur offset shadows.
+   4. Typography: Heavy uppercase headlines (Impact, Arial Black) & Typewriter body (Courier New).
+   5. Keyframe Animation: Choppy motion animated on "twos" using CSS steps().
+   6. Interactivity: Instant black/white color inversion on hover/focus (no fades).
+   7. Accessibility: Full prefers-reduced-motion, keyboard navigation & WCAG contrast.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   0. CSS RESET & VARIABLES
+   ----------------------------------------------------------------------------- */
+:root {
+  /* Strict 2-Color Monochrome Palette */
+  --ink-black: #000000;
+  --paper-white: #FFFFFF;
+
+  /* Typography */
+  --font-headline: Impact, "Arial Black", "Trebuchet MS", sans-serif;
+  --font-typewriter: "Courier New", Courier, monospace;
+
+  /* Comic Ink Metrics */
+  --border-thick: 5px solid #000000;
+  --border-heavy: 6px solid #000000;
+  --border-medium: 4px solid #000000;
+  --border-thin: 2px solid #000000;
+
+  /* Hard Offset Echo Shadows (Zero Blur) */
+  --shadow-echo-sm: 4px 4px 0px #000000;
+  --shadow-echo-md: 6px 6px 0px #000000;
+  --shadow-echo-lg: 10px 10px 0px #000000;
+  --shadow-echo-white: 6px 6px 0px #FFFFFF;
+
+  /* Container Sizing */
+  --container-max: 1200px;
+}
+
+/* Universal Box-Sizing & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Eliminate smooth transitions for raw comic ink snap */
+  transition: none !important;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+}
+
+body {
+  font-family: var(--font-typewriter);
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible Skip Navigation Link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--ink-black);
+  color: var(--paper-white);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  z-index: 99999;
+  border: var(--border-medium);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  background: var(--paper-white);
+  color: var(--ink-black);
+  outline: 4px solid var(--ink-black);
+}
+
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* -----------------------------------------------------------------------------
+   1. TEXTURE PATTERNS (PURE BLACK & WHITE ONLY - NO GRAYS)
+   ----------------------------------------------------------------------------- */
+
+/* Classic Comic Halftone Dot Screen (Radial Gradient) */
+.halftone-dots {
+  background-color: var(--paper-white);
+  background-image: radial-gradient(circle, var(--ink-black) 26%, transparent 27%);
+  background-size: 8px 8px;
+}
+
+/* Dense Halftone Screen */
+.halftone-dense {
+  background-color: var(--paper-white);
+  background-image: radial-gradient(circle, var(--ink-black) 42%, transparent 43%);
+  background-size: 6px 6px;
+}
+
+/* Inverted Halftone Dots (White dots punched through Black ink) */
+.halftone-inverted {
+  background-color: var(--ink-black);
+  background-image: radial-gradient(circle, var(--paper-white) 26%, transparent 27%);
+  background-size: 8px 8px;
+}
+
+/* Slanted Hatching / Crosshatch Shading */
+.hatching-stripes,
+.hatching-slanted {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--ink-black),
+    var(--ink-black) 2px,
+    var(--paper-white) 2px,
+    var(--paper-white) 8px
+  );
+}
+
+.crosshatch-lines {
+  background-color: var(--paper-white);
+  background-image: 
+    repeating-linear-gradient(45deg, var(--ink-black) 0, var(--ink-black) 2px, transparent 2px, transparent 10px),
+    repeating-linear-gradient(-45deg, var(--ink-black) 0, var(--ink-black) 2px, transparent 2px, transparent 10px);
+}
+
+/* Venetian Blinds Light-Slat Pattern */
+.slat-shadow-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--ink-black) 0px,
+    var(--ink-black) 16px,
+    transparent 16px,
+    transparent 42px
+  );
+  opacity: 0.18; /* Stark ink slats */
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* -----------------------------------------------------------------------------
+   2. "ANIMATED ON TWOS" KEYFRAMES (CHOPPY, HAND-DRAWN STEPS)
+   ----------------------------------------------------------------------------- */
+
+/* Falling Noir Rain Animation (Choppy 4-step motion) */
+@keyframes rainDropSteps {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: -40px 160px;
+  }
+}
+
+.rain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    108deg,
+    transparent 0px,
+    transparent 28px,
+    var(--ink-black) 28px,
+    var(--ink-black) 30px,
+    transparent 30px,
+    transparent 60px
+  );
+  background-size: 70px 160px;
+  pointer-events: none;
+  z-index: 3;
+  animation: rainDropSteps 0.28s steps(4) infinite;
+}
+
+/* Hand-Inked Headline Jitter / Boil (Choppy 4-step vibration) */
+@keyframes inkJitterSteps {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  25% {
+    transform: translate(-3px, 2px) rotate(-0.5deg);
+  }
+  50% {
+    transform: translate(2px, -2px) rotate(0.5deg);
+  }
+  75% {
+    transform: translate(-2px, -1px) rotate(-0.25deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+.jitter-headline {
+  display: block;
+  animation: inkJitterSteps 0.35s steps(4) infinite;
+}
+
+/* Swinging Spider Pendulum (Choppy 6-step motion) */
+@keyframes pendulumSwingSteps {
+  0% {
+    transform: rotate(-22deg);
+  }
+  50% {
+    transform: rotate(22deg);
+  }
+  100% {
+    transform: rotate(-22deg);
+  }
+}
+
+.spider-suspension-apparatus {
+  position: absolute;
+  top: 0;
+  right: 15%;
+  width: 80px;
+  height: 140px;
+  transform-origin: top center;
+  z-index: 5;
+  animation: pendulumSwingSteps 1.8s steps(6) infinite alternate;
+}
+
+.spider-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Rotating Comic Speed-Line Burst (Choppy 8-step rotation) */
+@keyframes speedBurstRotateSteps {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.speed-lines-burst {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    var(--ink-black) 0deg 9deg,
+    var(--paper-white) 9deg 18deg
+  );
+  border: var(--border-thick);
+  box-shadow: var(--shadow-echo-md);
+  animation: speedBurstRotateSteps 1.4s steps(8) infinite;
+}
+
+/* Mini Sound Burst Jitter */
+@keyframes burstVibration {
+  0% { transform: scale(1) rotate(-8deg); }
+  50% { transform: scale(1.08) rotate(-4deg); }
+  100% { transform: scale(1) rotate(-8deg); }
+}
+
+/* -----------------------------------------------------------------------------
+   3. SEMANTIC HEADER & MOBILE NAVIGATION
+   ----------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--paper-white);
+  border-bottom: var(--border-heavy);
+  z-index: 1000;
+  box-shadow: var(--shadow-echo-sm);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  position: relative;
+}
+
+/* Comic Masthead Logo */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--ink-black);
+}
+
+.brand-badge {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.4rem;
+  letter-spacing: 1px;
+  border: var(--border-thin);
+}
+
+.brand-title {
+  font-family: var(--font-headline);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.brand-accent {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  padding: 0.1rem 0.3rem;
+  margin-left: 2px;
+}
+
+/* Instant Inversion on Brand Logo */
+.brand-logo:hover,
+.brand-logo:focus-visible {
+  outline: 3px solid var(--ink-black);
+  outline-offset: 3px;
+}
+.brand-logo:hover .brand-badge,
+.brand-logo:focus-visible .brand-badge {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+}
+.brand-logo:hover .brand-title,
+.brand-logo:focus-visible .brand-title {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+}
+
+/* Mobile Menu Toggle Button */
+.menu-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  border: var(--border-thick);
+  padding: 0.5rem 0.85rem;
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  box-shadow: var(--shadow-echo-sm);
+}
+
+.menu-icon-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20px;
+  height: 16px;
+}
+
+.menu-bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--ink-black);
+}
+
+/* Instant Invert on Button Hover/Focus */
+.menu-toggle-btn:hover,
+.menu-toggle-btn:focus-visible {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  box-shadow: -4px -4px 0px var(--ink-black);
+  outline: 3px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+.menu-toggle-btn:hover .menu-bar,
+.menu-toggle-btn:focus-visible .menu-bar {
+  background-color: var(--paper-white);
+}
+
+/* Active State Transformation (Menu Open) */
+.menu-toggle-btn[aria-expanded="true"] {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+}
+.menu-toggle-btn[aria-expanded="true"] .menu-bar {
+  background-color: var(--paper-white);
+}
+.menu-toggle-btn[aria-expanded="true"] .menu-bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-toggle-btn[aria-expanded="true"] .menu-bar:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle-btn[aria-expanded="true"] .menu-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Navigation Dropdown / Drawer (Mobile-First) */
+.primary-nav {
+  display: none; /* Hidden by default on mobile */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--paper-white);
+  border-bottom: var(--border-heavy);
+  border-top: var(--border-thick);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow-echo-lg);
+  z-index: 999;
+}
+
+.primary-nav.is-open {
+  display: block;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  min-height: 44px;
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-black);
+  text-decoration: none;
+  border-left: 6px solid transparent;
+}
+
+/* Instant Color Inversion on Hover/Focus */
+.nav-link:hover,
+.nav-link:focus-visible {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  border-left: 6px solid var(--paper-white);
+  outline: 3px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+.btn-cta-nav {
+  display: block;
+  text-align: center;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  padding: 0.85rem 1.25rem;
+  min-height: 44px;
+  font-family: var(--font-headline);
+  font-size: 1.2rem;
+  text-decoration: none;
+  letter-spacing: 1px;
+  border: var(--border-thick);
+  box-shadow: var(--shadow-echo-sm);
+}
+
+.btn-cta-nav:hover,
+.btn-cta-nav:focus-visible {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  box-shadow: -4px -4px 0px var(--ink-black);
+  outline: 3px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   4. HERO SECTION: COMIC NOIR ATMOSPHERE
+   ----------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  background-color: var(--paper-white);
+  border-bottom: var(--border-heavy);
+  padding-top: 3.5rem;
+  padding-bottom: 4.5rem;
+  overflow: hidden;
+}
+
+/* Corner Spider Web Graphic */
+.corner-spider-web {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.web-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Speed-Line Rotating Burst Anchor */
+.hero-burst-anchor {
+  position: absolute;
+  top: 15%;
+  right: -60px;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Comic Narrative Caption Box (Yellow Journalism / Typewriter Caption) */
+.comic-caption-box {
+  background-color: var(--paper-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-echo-md);
+  padding: 1rem 1.25rem;
+  max-width: 580px;
+  position: relative;
+}
+
+.caption-stamp {
+  display: inline-block;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.caption-text {
+  font-family: var(--font-typewriter);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.4;
+}
+
+/* Hero Headline & Sound Bursts */
+.hero-title-group {
+  position: relative;
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hero-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(3.2rem, 9vw, 7.5rem);
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  color: var(--ink-black);
+}
+
+.headline-layer {
+  display: block;
+}
+
+.outline-headline {
+  color: var(--paper-white);
+  -webkit-text-stroke: 4px var(--ink-black);
+  text-shadow: 6px 6px 0px var(--ink-black);
+}
+
+/* Comic Sound-Effect Bursts (Jagged Polygonal Badges) */
+.sound-burst-inline {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  padding: 1.25rem 1.25rem;
+  letter-spacing: 1px;
+  z-index: 15;
+  clip-path: polygon(
+    50% 0%, 65% 18%, 85% 5%, 82% 28%, 100% 36%, 85% 52%,
+    100% 68%, 82% 76%, 85% 98%, 65% 85%, 50% 100%, 35% 85%,
+    15% 98%, 18% 76%, 0% 68%, 15% 52%, 0% 36%, 18% 28%,
+    15% 5%, 35% 18%
+  );
+  animation: burstVibration 0.6s steps(3) infinite;
+}
+
+.burst-thwip {
+  top: -2.5rem;
+  left: 55%;
+  transform: rotate(12deg);
+}
+
+.burst-crash {
+  bottom: -2.5rem;
+  right: 5%;
+  transform: rotate(-15deg);
+}
+
+/* Instant Sound Burst Inversion on Hover */
+.sound-burst-inline:hover {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  outline: 4px solid var(--ink-black);
+}
+
+/* Hero Narrative Briefing Card */
+.hero-narrative-card {
+  background-color: var(--paper-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-echo-lg);
+  padding: 1.75rem;
+  max-width: 680px;
+}
+
+.typewriter-body {
+  font-family: var(--font-typewriter);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+/* Noir Buttons (Strict Pure Black & White) */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn-noir {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-headline);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding: 1rem 1.75rem;
+  min-height: 48px;
+  cursor: pointer;
+  border: var(--border-thick);
+}
+
+.btn-primary-cta {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  box-shadow: var(--shadow-echo-md);
+}
+
+.btn-secondary-cta {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  box-shadow: var(--shadow-echo-md);
+}
+
+/* Instant Color Inversion on Buttons (No Transitions) */
+.btn-primary-cta:hover,
+.btn-primary-cta:focus-visible {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  box-shadow: -6px -6px 0px var(--ink-black);
+  outline: 3px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+.btn-secondary-cta:hover,
+.btn-secondary-cta:focus-visible {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  box-shadow: -6px -6px 0px var(--ink-black);
+  outline: 3px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+.btn-arrow {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* -----------------------------------------------------------------------------
+   5. FEATURE HIGHLIGHTS: IRREGULAR COMIC PANELS & HALFTONE SHADING
+   ----------------------------------------------------------------------------- */
+.cases-section {
+  position: relative;
+  background-color: var(--paper-white);
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+/* Section Header Plaque */
+.section-header {
+  margin-bottom: 3.5rem;
+  text-align: left;
+}
+
+.header-plaque {
+  display: inline-block;
+  background-color: var(--paper-white);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-echo-md);
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.plaque-subtitle {
+  display: block;
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 0.5rem;
+  width: fit-content;
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.ink-rule {
+  width: 100%;
+  height: 6px;
+  background-color: var(--ink-black);
+  margin-top: 0.75rem;
+}
+
+.section-lead {
+  font-family: var(--font-typewriter);
+  font-size: 1.1rem;
+  max-width: 720px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Irregular Comic Panels Grid */
+.comic-panels-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+/* Master Comic Panel Container */
+.comic-panel {
+  position: relative;
+  /* Hard echo drop shadow for irregular polygonal clips */
+  filter: drop-shadow(8px 8px 0px var(--ink-black));
+}
+
+/* Frame Outer Layer (Creates exact 5px thick ink border around polygons) */
+.panel-border-cut {
+  background-color: var(--ink-black);
+  padding: 5px;
+}
+
+/* Specific Irregular Polygonal Slanted Cuts */
+/* Panel 1: Slanted top-right cut */
+.panel-alpha .panel-border-cut,
+.panel-alpha .panel-content {
+  clip-path: polygon(0 0, 100% 4%, 100% 100%, 3% 97%);
+}
+
+/* Panel 2: Diagonal incline cut */
+.panel-beta .panel-border-cut,
+.panel-beta .panel-content {
+  clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 96%);
+}
+
+/* Panel 3: Opposing geometric rake */
+.panel-gamma .panel-border-cut,
+.panel-gamma .panel-content {
+  clip-path: polygon(0% 4%, 96% 0%, 100% 96%, 4% 100%);
+}
+
+/* Inner Panel Card */
+.panel-content {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 420px;
+}
+
+/* In-Card Halftone Texture Overlay */
+.panel-texture {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 120px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* Panel Header Strip */
+.panel-header-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.panel-index {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.6rem;
+  letter-spacing: 1px;
+}
+
+/* Mini Jagged Sound Burst */
+.sound-burst-mini {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
+  letter-spacing: 0.5px;
+  clip-path: polygon(
+    50% 0%, 65% 20%, 85% 8%, 80% 32%, 100% 45%, 82% 60%,
+    95% 80%, 75% 82%, 65% 100%, 45% 85%, 25% 95%, 28% 75%,
+    5% 65%, 20% 45%, 0% 30%, 22% 20%
+  );
+  transform: rotate(8deg);
+  animation: burstVibration 0.8s steps(3) infinite;
+}
+
+.burst-krak {
+  transform: rotate(-10deg);
+}
+
+.burst-thwip-small {
+  transform: rotate(5deg);
+}
+
+.panel-headline {
+  font-family: var(--font-headline);
+  font-size: 1.85rem;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Silhouette Graphic Containers */
+.panel-illustration {
+  width: 100%;
+  height: 140px;
+  border: var(--border-medium);
+  margin-bottom: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--paper-white);
+}
+
+.silhouette-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.prowler-graphic {
+  background: 
+    radial-gradient(circle at 75% 40%, var(--paper-white) 18px, var(--ink-black) 20px),
+    linear-gradient(to top, var(--ink-black) 50%, transparent 50%);
+}
+
+.dock-graphic {
+  background: 
+    linear-gradient(135deg, var(--ink-black) 25%, transparent 25%) -50px 0,
+    linear-gradient(225deg, var(--ink-black) 25%, transparent 25%) -50px 0,
+    linear-gradient(315deg, var(--ink-black) 25%, transparent 25%),
+    linear-gradient(45deg, var(--ink-black) 25%, transparent 25%);
+  background-size: 32px 32px;
+  background-color: var(--paper-white);
+}
+
+.sewer-graphic {
+  background: 
+    radial-gradient(circle at 50% 100%, var(--paper-white) 40px, var(--ink-black) 42px);
+}
+
+.panel-description {
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: var(--border-thin);
+  padding-top: 0.85rem;
+}
+
+.panel-tag {
+  font-family: var(--font-headline);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.panel-link {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  color: var(--ink-black);
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: var(--border-thin);
+}
+
+/* Instant Panel Inversion on Hover/Focus */
+.panel-link:hover,
+.panel-link:focus-visible {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  outline: 3px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+/* Panel hover feedback */
+.comic-panel:hover .panel-content {
+  border-color: var(--ink-black);
+}
+
+/* -----------------------------------------------------------------------------
+   6. SUPPORTING SECTION: COMIC STRIP SEQUENTIAL LAYOUT & DIAGONAL CUTS
+   ----------------------------------------------------------------------------- */
+.evidence-strip-section {
+  position: relative;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  padding-top: 5rem;
+  padding-bottom: 5.5rem;
+  /* Dramatic diagonal clip-path cuts */
+  clip-path: polygon(0 3vw, 100% 0, 100% calc(100% - 3vw), 0 100%);
+  margin-top: -2vw;
+  margin-bottom: -2vw;
+  z-index: 20;
+}
+
+.strip-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.comic-stamp-box {
+  display: inline-block;
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  font-family: var(--font-headline);
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.75rem;
+  border: var(--border-thick);
+}
+
+.strip-main-title {
+  font-family: var(--font-headline);
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: var(--paper-white);
+}
+
+/* Strip Sequence Grid */
+.strip-sequence-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.strip-frame {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  border: 5px solid var(--paper-white);
+  outline: 5px solid var(--ink-black);
+  padding: 1.5rem;
+  box-shadow: 8px 8px 0px var(--paper-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+}
+
+.frame-tag {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 0.85rem;
+  padding: 0.2rem 0.5rem;
+  width: fit-content;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+/* Speech Balloon with Tail */
+.speech-bubble {
+  position: relative;
+  background-color: var(--paper-white);
+  border: var(--border-thick);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 4px 4px 0px var(--ink-black);
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 24px;
+  border-width: 14px 12px 0 0;
+  border-style: solid;
+  border-color: var(--ink-black) transparent transparent transparent;
+}
+
+.speech-text {
+  font-family: var(--font-typewriter);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+/* Thought Balloon (Cloud-like) */
+.thought-bubble {
+  position: relative;
+  background-color: var(--paper-white);
+  border: var(--border-thick);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 4px 4px 0px var(--ink-black);
+}
+
+.thought-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 28px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--paper-white);
+  border: 3px solid var(--ink-black);
+  border-radius: 50%;
+}
+
+.thought-text {
+  font-family: var(--font-typewriter);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+/* Giant Sound Burst in Frame 3 */
+.sound-burst-huge {
+  align-self: center;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  padding: 1.75rem 2rem;
+  letter-spacing: 2px;
+  clip-path: polygon(
+    50% 0%, 65% 15%, 85% 5%, 80% 28%, 100% 35%, 85% 50%,
+    100% 65%, 80% 72%, 85% 95%, 65% 85%, 50% 100%, 35% 85%,
+    15% 95%, 20% 72%, 0% 65%, 15% 50%, 0% 35%, 20% 28%,
+    15% 5%, 35% 15%
+  );
+  margin-bottom: 1.25rem;
+  animation: burstVibration 0.5s steps(2) infinite;
+}
+
+.sound-burst-huge:hover {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  outline: 4px solid var(--ink-black);
+}
+
+/* Visual Placeholder inside Strip Frame */
+.frame-visual {
+  height: 90px;
+  border: var(--border-medium);
+  display: flex;
+  align-items: flex-end;
+  padding: 0.5rem;
+  background-color: var(--paper-white);
+}
+
+.texture-halftone {
+  background-image: radial-gradient(circle, var(--ink-black) 25%, transparent 26%);
+  background-size: 6px 6px;
+}
+
+.texture-hatching {
+  background-image: repeating-linear-gradient(45deg, var(--ink-black) 0, var(--ink-black) 2px, transparent 2px, transparent 6px);
+}
+
+.texture-slats {
+  background-image: repeating-linear-gradient(to bottom, var(--ink-black) 0, var(--ink-black) 4px, transparent 4px, transparent 12px);
+}
+
+.frame-caption-bottom {
+  background-color: var(--paper-white);
+  border: var(--border-thin);
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-typewriter);
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+   7. TELEGRAPH DISPATCH / CALL TO ACTION SECTION
+   ----------------------------------------------------------------------------- */
+.dispatch-section {
+  position: relative;
+  background-color: var(--paper-white);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.dispatch-border-wrapper {
+  background-color: var(--ink-black);
+  padding: 6px;
+  box-shadow: var(--shadow-echo-lg);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dispatch-card {
+  background-color: var(--paper-white);
+  border: var(--border-thick);
+  padding: 2.5rem 1.75rem;
+  text-align: center;
+}
+
+.dispatch-badge {
+  display: inline-block;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.dispatch-headline {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 1.25rem;
+}
+
+.dispatch-body {
+  font-family: var(--font-typewriter);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.6;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.form-label {
+  font-family: var(--font-headline);
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.input-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.noir-input {
+  font-family: var(--font-typewriter);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.9rem 1.2rem;
+  min-height: 48px;
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-echo-sm);
+  outline: none;
+}
+
+.noir-input:focus {
+  background-color: var(--paper-white);
+  outline: 4px solid var(--ink-black);
+  outline-offset: 2px;
+}
+
+.btn-form-submit {
+  min-height: 48px;
+}
+
+.dispatch-confidential {
+  display: block;
+  font-family: var(--font-typewriter);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 1.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+   8. FOOTER: SEMANTIC MONOCHROME DIRECTORY
+   ----------------------------------------------------------------------------- */
+.site-footer {
+  position: relative;
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  border-top: var(--border-heavy);
+  padding-top: 4rem;
+  padding-bottom: 2.5rem;
+}
+
+.footer-top-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--paper-white) 0px,
+    var(--paper-white) 12px,
+    var(--ink-black) 12px,
+    var(--ink-black) 24px
+  );
+}
+
+.footer-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 2px solid var(--paper-white);
+}
+
+.footer-brand {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.footer-desc {
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.footer-edition {
+  font-family: var(--font-headline);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border: 1px solid var(--paper-white);
+  padding: 0.2rem 0.5rem;
+  display: inline-block;
+}
+
+.footer-heading {
+  font-family: var(--font-headline);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--paper-white);
+  padding-bottom: 0.4rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-link {
+  color: var(--paper-white);
+  text-decoration: none;
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.2rem 0.4rem;
+  display: inline-block;
+}
+
+/* Instant Link Inversion */
+.footer-link:hover,
+.footer-link:focus-visible {
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  outline: 2px solid var(--paper-white);
+}
+
+.footer-address {
+  font-style: normal;
+  font-family: var(--font-typewriter);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.social-note {
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.social-links-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--paper-white);
+  color: var(--ink-black);
+  border: var(--border-medium);
+  box-shadow: 4px 4px 0px var(--paper-white);
+  text-decoration: none;
+}
+
+.social-icon-btn:hover,
+.social-icon-btn:focus-visible {
+  background-color: var(--ink-black);
+  color: var(--paper-white);
+  border-color: var(--paper-white);
+  box-shadow: -4px -4px 0px var(--paper-white);
+  outline: 3px solid var(--paper-white);
+  outline-offset: 2px;
+}
+
+.social-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-legal {
+  padding-top: 2rem;
+  text-align: center;
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.disclaimer-line {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+/* -----------------------------------------------------------------------------
+   9. RESPONSIVE BREAKPOINTS (MOBILE-FIRST PROGRESSIVE ENHANCEMENT)
+   ----------------------------------------------------------------------------- */
+
+/* Tablet Screens (Min-width: 768px) */
+@media (min-width: 768px) {
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .comic-panels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Span panel 3 across full width on 2-col layout */
+  .panel-gamma {
+    grid-column: span 2;
+  }
+
+  .strip-sequence-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .input-action-group {
+    flex-direction: row;
+  }
+
+  .noir-input {
+    flex: 1;
+  }
+
+  .footer-content-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop Screens (Min-width: 1024px) */
+@media (min-width: 1024px) {
+  /* Hide Mobile Menu Toggle & Restore Desktop Horizontal Navigation */
+  .menu-toggle-btn {
+    display: none;
+  }
+
+  .primary-nav {
+    display: block !important;
+    position: static;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav-item {
+    width: auto;
+  }
+
+  .nav-link {
+    font-size: 1.15rem;
+    padding: 0.5rem 0.75rem;
+    border-left: none;
+    border-bottom: 4px solid transparent;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    border-left: none;
+    border-bottom: 4px solid var(--paper-white);
+  }
+
+  .btn-cta-nav {
+    padding: 0.6rem 1.2rem;
+    font-size: 1.05rem;
+  }
+
+  /* Comic Panels 3-Column Asymmetric Distribution */
+  .comic-panels-grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+
+  .panel-gamma {
+    grid-column: auto;
+  }
+
+  /* Stagger panel vertical placement for authentic offset comic book page look */
+  .panel-alpha {
+    transform: translateY(-12px);
+  }
+
+  .panel-beta {
+    transform: translateY(16px);
+  }
+
+  .panel-gamma {
+    transform: translateY(-8px);
+  }
+
+  .footer-content-grid {
+    grid-template-columns: 2fr 1fr 1.5fr 1fr;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   10. ACCESSIBILITY: PREFERS-REDUCED-MOTION
+   ----------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .rain-overlay,
+  .speed-lines-burst,
+  .spider-suspension-apparatus,
+  .jitter-headline,
+  .sound-burst-inline,
+  .sound-burst-mini,
+  .sound-burst-huge {
+    animation: none !important;
+  }
+
+  /* Static fallbacks for kinetic elements */
+  .spider-suspension-apparatus {
+    transform: rotate(0deg) !important;
+  }
+
+  .speed-lines-burst {
+    transform: rotate(0deg) !important;
+  }
+}

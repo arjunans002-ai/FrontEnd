@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Animated Comic Noir Landing Page - A dramatic, pure black-and-white graphic novel web experience featuring halftone patterns, jagged sound bursts, and kinetic typography.">
+  <title>NOIR ARCHIVES // Issue #01: The Midnight Vigilante</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Skip Link for Keyboard Accessibility -->
+  <a href="#main-content" class="skip-link">SKIP TO MAIN CASE CONTENT</a>
+
+  <!-- =========================================================================
+       SEMANTIC HEADER: Brand Logo, Navigation Menu, & Mobile ARIA Toggle
+       ========================================================================= -->
+  <header class="site-header" role="banner">
+    <div class="header-inner container">
+      <!-- Comic Masthead Logo -->
+      <a href="#hero" class="brand-logo" aria-label="Noir Archives Home">
+        <span class="brand-badge">VOL. 01</span>
+        <span class="brand-title">NOIR<span class="brand-accent">ARCHIVES</span></span>
+      </a>
+
+      <!-- Mobile Menu Toggle Button (Keyboard Accessible with Live ARIA State) -->
+      <button 
+        id="menu-toggle" 
+        class="menu-toggle-btn" 
+        type="button" 
+        aria-expanded="false" 
+        aria-controls="primary-nav" 
+        aria-label="Open navigation menu"
+      >
+        <span class="menu-icon-box" aria-hidden="true">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </span>
+        <span class="menu-toggle-label">MENU</span>
+      </button>
+
+      <!-- Primary Navigation Bar -->
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#hero" class="nav-link">PROLOGUE</a></li>
+          <li class="nav-item"><a href="#cases" class="nav-link">CASE DOSSIERS</a></li>
+          <li class="nav-item"><a href="#evidence" class="nav-link">CRIME STRIP</a></li>
+          <li class="nav-item"><a href="#dispatch" class="nav-link">DISPATCH</a></li>
+          <li class="nav-item nav-item-cta">
+            <a href="#cases" class="btn-cta-nav">OPEN CASEFILE</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main id="main-content">
+
+    <!-- =======================================================================
+         HERO SECTION: Noir Alleyway, Spider Silhouette, Rain, & Bursts
+         ======================================================================= -->
+    <section class="hero-section" id="hero" aria-labelledby="hero-title">
+      <!-- Atmospheric Falling Rain Simulation Layer -->
+      <div class="rain-overlay" aria-hidden="true"></div>
+
+      <!-- Venetian Blind Light-Slat Shadow Pattern Layer -->
+      <div class="slat-shadow-overlay" aria-hidden="true"></div>
+
+      <!-- Corner Graphic: Authentic Inline-SVG Spider Web -->
+      <div class="corner-spider-web" aria-hidden="true">
+        <svg viewBox="0 0 200 200" class="web-svg" preserveAspectRatio="none">
+          <line x1="0" y1="0" x2="200" y2="0" stroke="#000000" stroke-width="4"/>
+          <line x1="0" y1="0" x2="0" y2="200" stroke="#000000" stroke-width="4"/>
+          <!-- Radial Web Strands -->
+          <line x1="0" y1="0" x2="200" y2="200" stroke="#000000" stroke-width="2"/>
+          <line x1="0" y1="0" x2="200" y2="90" stroke="#000000" stroke-width="2"/>
+          <line x1="0" y1="0" x2="90" y2="200" stroke="#000000" stroke-width="2"/>
+          <line x1="0" y1="0" x2="200" y2="40" stroke="#000000" stroke-width="2"/>
+          <line x1="0" y1="0" x2="40" y2="200" stroke="#000000" stroke-width="2"/>
+          <line x1="0" y1="0" x2="200" y2="140" stroke="#000000" stroke-width="2"/>
+          <line x1="0" y1="0" x2="140" y2="200" stroke="#000000" stroke-width="2"/>
+          <!-- Concentric Web Arcs -->
+          <path d="M 0,35 Q 25,25 35,0" fill="none" stroke="#000000" stroke-width="2"/>
+          <path d="M 0,70 Q 50,50 70,0" fill="none" stroke="#000000" stroke-width="2"/>
+          <path d="M 0,110 Q 80,80 110,0" fill="none" stroke="#000000" stroke-width="2"/>
+          <path d="M 0,150 Q 110,110 150,0" fill="none" stroke="#000000" stroke-width="2"/>
+          <path d="M 0,195 Q 140,140 195,0" fill="none" stroke="#000000" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <!-- Kinetic Element: Choppy Swinging Spider Silhouette -->
+      <div class="spider-suspension-apparatus" aria-hidden="true">
+        <svg viewBox="0 0 80 140" class="spider-svg">
+          <!-- Spider Silk Thread -->
+          <line x1="40" y1="0" x2="40" y2="85" stroke="#000000" stroke-width="2.5" stroke-dasharray="4,2"/>
+          <!-- Spider Abdomen & Cephalothorax -->
+          <ellipse cx="40" cy="95" rx="8" ry="12" fill="#000000"/>
+          <circle cx="40" cy="110" r="10" fill="#000000"/>
+          <!-- 8 Angular Hand-Inked Legs -->
+          <path d="M 36,95 Q 20,85 10,95 Q 6,105 2,120" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 44,95 Q 60,85 70,95 Q 74,105 78,120" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 35,100 Q 15,96 8,110 Q 5,122 0,135" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 45,100 Q 65,96 72,110 Q 75,122 80,135" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M 35,105 Q 18,115 12,126 Q 10,134 4,142" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 45,105 Q 62,115 68,126 Q 70,134 76,142" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 37,112 Q 24,128 18,138" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 43,112 Q 56,128 62,138" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <!-- Comic Kinetic Rotating Speed-Line Burst Background -->
+      <div class="hero-burst-anchor" aria-hidden="true">
+        <div class="speed-lines-burst"></div>
+      </div>
+
+      <!-- Main Hero Content Box -->
+      <div class="hero-container container">
+        
+        <!-- Comic Narrative Caption Header Box -->
+        <div class="comic-caption-box">
+          <span class="caption-stamp">DISTRICT 09 // 00:00 HOURS</span>
+          <p class="caption-text">
+            THE RAIN CRASHES DOWN LIKE BROKEN GLASS. IN THE INK-STAINED SHADOWS, JUSTICE WAITS FOR NO MAN.
+          </p>
+        </div>
+
+        <!-- Oversized Kinetic Title with Ink Jitter Animation -->
+        <div class="hero-title-group">
+          <span class="sound-burst-inline burst-thwip" aria-hidden="true">THWIP!</span>
+          <h1 id="hero-title" class="hero-headline">
+            <span class="headline-layer jitter-headline">MIDNIGHT</span>
+            <span class="headline-layer outline-headline">VIGILANTE</span>
+          </h1>
+          <span class="sound-burst-inline burst-crash" aria-hidden="true">CRASH!</span>
+        </div>
+
+        <!-- Typewriter Noir Briefing Paragraph -->
+        <div class="hero-narrative-card">
+          <p class="typewriter-body">
+            Corruption suffocates the metropolitan grid. Syndicate crime syndicates operate behind frosted boardrooms while the precinct radio drowns in static. Armed only with a trench coat, fractured street intelligence, and silent resolve, one operative stalks the gargoyles of Gotham’s dark cousin.
+          </p>
+          <div class="hero-actions">
+            <a href="#cases" class="btn-noir btn-primary-cta">
+              INSPECT THE CRIME SCENE
+              <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a href="#evidence" class="btn-noir btn-secondary-cta">
+              EXAMINE EVIDENCE
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         FEATURE HIGHLIGHTS SECTION: Irregular Comic Panels with Halftone Shading
+         ======================================================================= -->
+    <section class="cases-section" id="cases" aria-labelledby="cases-title">
+      <div class="section-divider-top" aria-hidden="true"></div>
+
+      <div class="container">
+        <!-- Section Header in Halftone Plaque -->
+        <header class="section-header">
+          <div class="header-plaque">
+            <span class="plaque-subtitle">ACTIVE INVESTIGATIONS // DOSSIERS</span>
+            <h2 id="cases-title" class="section-title">THE ROGUES GALLERY</h2>
+            <div class="ink-rule" aria-hidden="true"></div>
+          </div>
+          <p class="section-lead">
+            Three classified sector violations. Review the crime scene geometry, inspect criminal modus operandi, and prepare immediate tactical retaliation.
+          </p>
+        </header>
+
+        <!-- Irregular Comic Grid Layout -->
+        <div class="comic-panels-grid">
+
+          <!-- PANEL 01: The Rooftop Prowler (Slanted Top-Left Cut, Dense Halftone) -->
+          <article class="comic-panel panel-alpha" aria-labelledby="panel-01-title">
+            <div class="panel-border-cut">
+              <div class="panel-content">
+                <div class="panel-texture halftone-dots" aria-hidden="true"></div>
+                <div class="panel-header-strip">
+                  <span class="panel-index">FILE #104-A</span>
+                  <span class="sound-burst-mini" aria-hidden="true">ZAP!</span>
+                </div>
+                <h3 id="panel-01-title" class="panel-headline">THE ROOFTOP PROWLER</h3>
+                <div class="panel-illustration" aria-hidden="true">
+                  <!-- Noir Graphic Silhouette -->
+                  <div class="silhouette-box prowler-graphic">
+                    <div class="hatching-slanted"></div>
+                  </div>
+                </div>
+                <p class="panel-description">
+                  Slipping between radio towers and rusted fire escapes, this phantom leaves electromagnetic interference and severed tripwires across the East Ward skyline.
+                </p>
+                <footer class="panel-footer">
+                  <span class="panel-tag">STATUS: AT LARGE</span>
+                  <a href="#dispatch" class="panel-link" aria-label="Review Rooftop Prowler dossier details">DOSSIER &rarr;</a>
+                </footer>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 02: The Dockside Heist (Diagonal Incline Cut, Striped Hatching) -->
+          <article class="comic-panel panel-beta" aria-labelledby="panel-02-title">
+            <div class="panel-border-cut">
+              <div class="panel-content">
+                <div class="panel-texture hatching-stripes" aria-hidden="true"></div>
+                <div class="panel-header-strip">
+                  <span class="panel-index">FILE #208-B</span>
+                  <span class="sound-burst-mini burst-krak" aria-hidden="true">KRAK!</span>
+                </div>
+                <h3 id="panel-02-title" class="panel-headline">THE DOCKSIDE HEIST</h3>
+                <div class="panel-illustration" aria-hidden="true">
+                  <!-- Dockside Crane Silhouette & Halftone Water -->
+                  <div class="silhouette-box dock-graphic">
+                    <div class="halftone-dense"></div>
+                  </div>
+                </div>
+                <p class="panel-description">
+                  Pier 44 cargo containers breached within twelve silent minutes. Rare titanium alloys vanished into the freezing black harbor waters before the harbor patrol woke.
+                </p>
+                <footer class="panel-footer">
+                  <span class="panel-tag">THREAT: CRITICAL</span>
+                  <a href="#dispatch" class="panel-link" aria-label="Review Dockside Heist dossier details">DOSSIER &rarr;</a>
+                </footer>
+              </div>
+            </div>
+          </article>
+
+          <!-- PANEL 03: The Sewer Labyrinth (Opposing Angle Cut, Radial Halftone) -->
+          <article class="comic-panel panel-gamma" aria-labelledby="panel-03-title">
+            <div class="panel-border-cut">
+              <div class="panel-content">
+                <div class="panel-texture halftone-inverted" aria-hidden="true"></div>
+                <div class="panel-header-strip">
+                  <span class="panel-index">FILE #312-C</span>
+                  <span class="sound-burst-mini burst-thwip-small" aria-hidden="true">THWIP!</span>
+                </div>
+                <h3 id="panel-03-title" class="panel-headline">THE SEWER LABYRINTH</h3>
+                <div class="panel-illustration" aria-hidden="true">
+                  <!-- Brick Arch & Tunnel Crosshatch Graphic -->
+                  <div class="silhouette-box sewer-graphic">
+                    <div class="crosshatch-lines"></div>
+                  </div>
+                </div>
+                <p class="panel-description">
+                  Sub-basement storm drains echo with encrypted Morse pulses. Smugglers transport contraband along uncharted colonial sewer aqueducts beneath City Hall.
+                </p>
+                <footer class="panel-footer">
+                  <span class="panel-tag">SECURITY: COMPROMISED</span>
+                  <a href="#dispatch" class="panel-link" aria-label="Review Sewer Labyrinth dossier details">DOSSIER &rarr;</a>
+                </footer>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+      <div class="section-divider-bottom" aria-hidden="true"></div>
+    </section>
+
+    <!-- =======================================================================
+         SUPPORTING COMIC STRIP SECTION: Narrative Panels & Diagonal Cuts
+         ======================================================================= -->
+    <section class="evidence-strip-section" id="evidence" aria-labelledby="evidence-title">
+      <div class="container">
+        
+        <header class="strip-header">
+          <div class="comic-stamp-box">CHRONOLOGICAL WITNESS TESTIMONY</div>
+          <h2 id="evidence-title" class="strip-main-title">FOUR MINUTES TO MIDNIGHT</h2>
+        </header>
+
+        <!-- Comic Strip Linear Narrative Grid -->
+        <div class="strip-sequence-grid">
+          
+          <!-- Strip Frame 1 -->
+          <div class="strip-frame frame-1">
+            <div class="frame-tag">FRAME 01 // 23:56</div>
+            <div class="speech-bubble bubble-tail-left">
+              <p class="speech-text">“THE CIPHER... IT WAS ETCHED INTO THE BRICKWORK WITH AN INDUSTRIAL LASER!”</p>
+            </div>
+            <div class="frame-visual texture-halftone">
+              <div class="frame-caption-bottom">A broken pocket watch sits frozen in a pool of motor oil.</div>
+            </div>
+          </div>
+
+          <!-- Strip Frame 2 -->
+          <div class="strip-frame frame-2">
+            <div class="frame-tag">FRAME 02 // 23:58</div>
+            <div class="thought-bubble">
+              <p class="thought-text">(IF THEY POWER UP THE SUB-STATION TRANSMITTER, ALL SURVEILLANCE FEED DIES.)</p>
+            </div>
+            <div class="frame-visual texture-hatching">
+              <div class="frame-caption-bottom">Footsteps echo down the fire escape alleyway.</div>
+            </div>
+          </div>
+
+          <!-- Strip Frame 3 -->
+          <div class="strip-frame frame-3">
+            <div class="frame-tag">FRAME 03 // 00:00</div>
+            <div class="sound-burst-huge" aria-hidden="true">BOOOM!</div>
+            <div class="frame-visual texture-slats">
+              <div class="frame-caption-bottom">The transformer explodes. Total blackout envelopes District 09.</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         CALL TO ACTION / TELEGRAPH DISPATCH SECTION
+         ======================================================================= -->
+    <section class="dispatch-section" id="dispatch" aria-labelledby="dispatch-title">
+      <div class="container">
+        <div class="dispatch-border-wrapper">
+          <div class="dispatch-card">
+            <div class="dispatch-badge">SPECIAL DISPATCH BULLETIN</div>
+            <h2 id="dispatch-title" class="dispatch-headline">ENLIST IN THE VIGILANTE NETWORK</h2>
+            <p class="dispatch-body">
+              Join the encrypted wire network. Receive nightly crime frequency updates, decoded enemy blueprints, and emergency beacon notifications directly at your safehouse desk.
+            </p>
+            <form class="telegraph-form" action="#" method="post" novalidate onsubmit="return false;">
+              <div class="form-row">
+                <label for="agent-alias" class="form-label">OPERATIVE CALLSIGN / EMAIL:</label>
+                <div class="input-action-group">
+                  <input 
+                    type="email" 
+                    id="agent-alias" 
+                    name="agent-alias" 
+                    class="noir-input" 
+                    placeholder="E.G. SPECTRE-7@SHADOWNET.ORG" 
+                    required 
+                    autocomplete="email"
+                  >
+                  <button type="submit" class="btn-noir btn-form-submit">
+                    TRANSMIT WIRE
+                  </button>
+                </div>
+              </div>
+            </form>
+            <span class="dispatch-confidential">PENCIL INK ONLY // NO DIGITAL TRACES PERMITTED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER: Semantic Navigation Links, Contact Information, & Socials
+       ========================================================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-top-accent" aria-hidden="true"></div>
+    <div class="container footer-content-grid">
+      
+      <!-- Footer Col 1: Brand & Noir Mission -->
+      <div class="footer-col footer-col-brand">
+        <div class="footer-brand">NOIR ARCHIVES</div>
+        <p class="footer-desc">
+          An interactive, open-source graphic novel interface preserving pulp crime lore through uncompromising monochrome design and kinetic typography.
+        </p>
+        <p class="footer-edition">PRINT EDITION ISSUE #01 // AUTUMN NIGHTS</p>
+      </div>
+
+      <!-- Footer Col 2: Navigation Links -->
+      <div class="footer-col footer-col-links">
+        <h3 class="footer-heading">EVIDENCE INDEX</h3>
+        <ul class="footer-nav-list">
+          <li><a href="#hero" class="footer-link">Prologue &amp; Skyline</a></li>
+          <li><a href="#cases" class="footer-link">Open Case Dossiers</a></li>
+          <li><a href="#evidence" class="footer-link">Crime Strip Timeline</a></li>
+          <li><a href="#dispatch" class="footer-link">Telegraph Dispatch</a></li>
+        </ul>
+      </div>
+
+      <!-- Footer Col 3: Safehouse Contact Coordinates -->
+      <div class="footer-col footer-col-contact">
+        <h3 class="footer-heading">SAFEHOUSE CONTACT</h3>
+        <address class="footer-address">
+          <p>44 BEEKMAN ALLEY, 4TH SUB-CELLAR</p>
+          <p>PRECINCT NINE, SECTOR BLACK</p>
+          <p>WIRE: <a href="tel:+15550192837" class="footer-link">TEL-555-019-2837</a></p>
+          <p>TELEGRAPH: <a href="mailto:vigilante@noirarchives.org" class="footer-link">DISPATCH@NOIRARCHIVES.ORG</a></p>
+        </address>
+      </div>
+
+      <!-- Footer Col 4: Accessible Pure Black & White Social Links -->
+      <div class="footer-col footer-col-social">
+        <h3 class="footer-heading">WIRE NETWORKS</h3>
+        <p class="social-note">FOLLOW THE INK TRAIL:</p>
+        <div class="social-links-group">
+          <!-- Accessible Social Icon 1: GitHub / Code Archive -->
+          <a href="https://github.com" class="social-icon-btn" aria-label="Operative Code Repository on GitHub" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" class="social-svg" aria-hidden="true">
+              <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+            </svg>
+          </a>
+
+          <!-- Accessible Social Icon 2: Terminal / Wire Feed -->
+          <a href="https://example.com/feed" class="social-icon-btn" aria-label="Encrypted Syndicate RSS Wire Feed" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" class="social-svg" aria-hidden="true">
+              <circle cx="6.18" cy="17.82" r="2.18" fill="currentColor"/>
+              <path fill="currentColor" d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+            </svg>
+          </a>
+
+          <!-- Accessible Social Icon 3: Telegraph Transmission -->
+          <a href="https://example.com/broadcast" class="social-icon-btn" aria-label="Direct Shortwave Radio Dispatch" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" class="social-svg" aria-hidden="true">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Copyright & Disclaimer Banner -->
+    <div class="footer-legal container">
+      <p class="copyright-line">&copy; 2026 NOIR ARCHIVES PUBLISHING GROUP. ALL RIGHTS RESERVED IN BLACK &amp; WHITE.</p>
+      <p class="disclaimer-line">PULP COMIC FICTION // NO AFFILIATION WITH CITY METROPOLITAN POLICE DEPARTMENT</p>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Interaction Controller -->
+  <script src="script.js"></script>
+</body>
+</html>
